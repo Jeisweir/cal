@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Calculadora de notas</title>
+        <!-- Agrega los archivos CSS de Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1>Calculadora de notas</h1>
+            <form>
+                <div class="form-group">
+                    <label for="p1">Nota 1:</label>
+                    <input type="number" class="form-control" id="p1" placeholder="Ingresa la nota 1">
+                </div>
+                <div class="form-group">
+                    <label for="p2">Nota 2:</label>
+                    <input type="number" class="form-control" id="p2" placeholder="Ingresa la nota 2">
+                </div>
+                <div class="form-group">
+                    <label for="p3">Nota 3:</label>
+                    <input type="number" class="form-control" id="p3" placeholder="Ingresa la nota 3">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="operation()">Calcular</button>
+            </form>
+            <div id="result" class="mt-3"></div>
+        </div>
+
+        <!-- Agrega los archivos JavaScript de Bootstrap y el script de la calculadora -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "Enter" && !event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
+                    // Verificar si el evento se originó en uno de los campos de entrada
+                    if (event.target === p1 || event.target === p2 || event.target === p3) {
+                        event.preventDefault();
+                        button.click();
+                        // Establecer el foco en el siguiente campo numérico
+                        if (event.target === p1) {
+                            document.getElementById("p2").focus();
+                        } else if (event.target === p2) {
+                            document.getElementById("p3").focus();
+                        }
+                    }
+                }
+            });
+
+            function operation() {
+                let p1 = parseFloat(document.getElementById("p1").value);
+                let p2 = parseFloat(document.getElementById("p2").value);
+                let p3 = parseFloat(document.getElementById("p3").value);
+                let sus = p1 + p2 + p3;
+                let result = sus / 3;
+                let need = 10 - result;
+                let button = document.querySelector("button");
+
+                // Establecer el foco en el primer campo de entrada
+                document.getElementById("p1").focus();
+
+                // Validar que los campos no estén vacíos
+                if (isNaN(p1) || isNaN(p2) || isNaN(p3)) {
+                    // Mostrar un mensaje de error
+                    document.getElementById("result").innerHTML = "Por favor ingrese todas las notas";
+                    return;
+                } else {
+                    if (result >= 10) {
+                        if (result % 1 >= 0.5) {
+                            document.getElementById("result").innerHTML = "Aprobado, pasas con un <span class='result-number-g'>" + Math.ceil(result) + "</span>";
+                        } else {
+                            document.getElementById("result").innerHTML = "Aprobado, pasas con un <span class='result-number-g'>" + Math.floor(result) + "</span>";
+                        }
+                    } else {
+                        let message = "Reprobado, te quedas con un <span class='result-number-b'>" + result.toFixed(2) + "</span>";
+                        if (need > 0) {
+                            message += ". Te faltarían al menos <span class='result-number-g'>" + need.toFixed(2) + "</span> puntos para aprobar";
+                        }
+                        document.getElementById("result").innerHTML = message;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

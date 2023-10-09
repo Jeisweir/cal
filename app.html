@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculadora de notas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <button type="button" class="btn btn-dark-mode" onclick="toggleDarkMode()">
+                <i class="fas fa-moon"></i>
+                <span>Modo oscuro</span>
+            </button>
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center">Calculadora de notas</h1>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <form id="myForm">
+                        <div class="form-aling">
+                            <label for="p1">Nota del primer corte</label>
+                            <input type="number" class="form-control" id="p1" required>
+                        </div>
+                        <div class="form-aling">
+                            <label for="p2">Nota del segundo corte</label>
+                            <input type="number" class="form-control" id="p2" required>
+                        </div>
+                        <div class="form-aling">
+                            <label for="p3">Nota del tercer corte</label>
+                            <input type="number" class="form-control" id="p3" required>
+                        </div>
+                        <button type="button" id="button" class="btn btn-primary btn-block" onclick="operation()">Calcular</button>   
+                    </form>
+                    <div class="result" id="result"></div>
+                </div>
+            </div>
+        </div>
+        <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

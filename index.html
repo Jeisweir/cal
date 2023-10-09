@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculadora de notas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .container {
+        margin-top: 2rem;
+      }
+      .card {
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      }
+      .card-header {
+        background-color: #2196f3;
+        color: #fff;
+        border-radius: 1rem 1rem 0 0;
+      }
+      .card-body {
+        padding: 2rem;
+      }
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+      .btn-primary {
+        background-color: #2196f3;
+        border-color: #2196f3;
+      }
+      .btn-primary:hover {
+        background-color: #0c7cd5;
+        border-color: #0c7cd5;
+      }
+      .result {
+        margin-top: 1.5rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-center">Calculadora de notas</h1>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="p1">Nota del primer parcial</label>
+              <input type="number" class="form-control" id="p1">
+            </div>
+            <div class="form-group">
+              <label for="p2">Nota del segundo parcial</label>
+              <input type="number" class="form-control" id="p2">
+            </div>
+            <div class="form-group">
+              <label for="p3">Nota del tercer parcial</label>
+              <input type="number" class="form-control" id="p3">
+            </div>
+            <button type="button" class="btn btn-primary btn-block" onclick="operation()">Calcular</button>
+          </form>
+          <div class="result" id="result"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function operation() {
+        let p1 = parseFloat(document.getElementById("p1").value);
+        let p2 = parseFloat(document.getElementById("p2").value);
+        let p3 = parseFloat(document.getElementById("p3").value);
+        let sus = p1 + p2 + p3;
+        let result = sus / 3;
+        let need = 10 - result;
+        if (result >= 10) {
+          if (result % 1 >= 0.5) {
+            document.getElementById("result").innerHTML = "Aprobado, pasas con un " + Math.ceil(result);
+          } else {
+            document.getElementById("result").innerHTML = "Aprobado, pasas con un " + Math.floor(result);
+          }
+        } else {
+          let message = "Reprobado, te quedas con un " + result.toFixed(2);
+          if (need > 0) {
+            message += ". Te faltarían al menos " + need.toFixed(2) + " puntos para aprobar";
+          }
+          document.getElementById("result").innerHTML = message;
+        }
+      }
+    </script>
+  </body>
+</html>
